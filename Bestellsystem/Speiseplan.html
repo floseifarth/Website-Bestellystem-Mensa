@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Einkopieren der Schriftart -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style-bestell.css">
+</head>
+
+<body>
+    <img class="logo" src="img/HochschuleEsslingen.svg" alt="">
+    <h1> Willkommen auf der Bestellwebsite der Hochschule Esslingen </h1>
+
+    <div class="menuleiste-links">
+        <a class="menu" href="startseite.html">
+            <img class="menu-icon" src="img/haus.svg" alt="">
+            Startseite
+        </a> <br>
+        <a class="active" href="Speiseplan.html">
+            <img class="menu-icon" src="img/speise.svg" alt="">
+            Speiseplan
+        </a> <br>
+        <a class="menu" href="Vorbestellungen.html">
+            <img class="menu-icon" src="img/shopping.svg" alt="">
+            Vorbestellung
+        </a> <br>
+        <a class="menu" href="Meine Bestellungen.html">
+            <img class="menu-icon" src="img/Liste.svg" alt="">
+            Meine Bestellungen
+        </a><br>
+        <a class="menu" href="Guthaben.html">
+            <img class="menu-icon" src="img/Karte.svg" alt="">
+            Guthaben
+        </a><br>
+        <a class="menu" href="QR-Code.html">
+            <img class="menu-icon" src="img/QR-Code.svg" alt="">
+            QR-Code
+        </a><br>
+        <a class="menu" href="Profil.html">
+            <img class="menu-icon" src="img/Profil.svg" alt="">
+            Profil
+        </a><br>
+    </div>
+    <div class="datum">
+        <div class="datum-row">
+            <p><span id="datum"></span></p>
+            <div class="profile-box">
+                <img class="profile-pic" src="img/Profil.svg" alt="Profilbild">
+                <span>Hallo Florian</span>
+            </div>
+        </div>
+        <script>
+            let heute = new Date();
+
+            let tage = [
+                "Sonntag", "Montag", "Dienstag",
+                "Mittwoch", "Donnerstag", "Freitag", "Samstag"
+            ];
+
+            let wochentag = tage[heute.getDay()];
+            let datum = heute.toLocaleDateString("de-DE");
+
+            document.getElementById("datum").innerText = wochentag + ", " + datum;
+        </script>
+    </div>
+    <div class="hauptfeld-mitte">
+        <h1>Speiseplan</h1>
+        <!-- Hier kommt der Speiseplan-Inhalt -->
+
+        <select>
+            <option value="Stadtmitte">Esslingen Stadtmitte</option>
+            <option value="Flandernstraße ">Flandernstraße</option>
+            <option value="Göppingen">Göppingen</option>
+        </select> <br><br>
+        <div>
+            <div class="gerichtdatum">
+                Dienstag <br>
+                07. April 2026 <br><br>
+            </div>
+
+            <div class="speiseplan-container">
+                <div class="kategorie"> Tagesangebot </div>
+                <div class="sidebar"> </div>
+                <div class="gericht-group">
+                    <div class="gericht"> Currywurst mit Currysauce mit Schwenkkartoffeln</div>
+                    <div class="gerichtpreis">Studierende: 4,10 € / Bedienstete: 7,10 € / Gäste: 7,60 €</div>
+                </div>
+            </div>
+            <br><br><br>
+            <div class="gerichtdatum">
+                Mittwoch <br>
+                08. April 2026 <br><br>
+            </div>
+
+            <div class="speiseplan-container">
+                <div class="kategorie"> Tagesangebot </div>
+                <div class="sidebar"> </div>
+                <div class="gericht-group">
+                    <div class="gericht"> Pasta Napoli</div>
+                    <div class="gerichtpreis">Studierende: 4,10 € / Bedienstete: 7,10 € / Gäste: 7,60 €</div>
+                </div>
+            </div>
+
+            <br><br><br>
+            <div class="gerichtdatum">
+                Donnerstag <br>
+                09. April 2026 <br><br>
+            </div>
+
+            <div class="speiseplan-container">
+                <div class="kategorie"> Tagesangebot </div>
+                <div class="sidebar"> </div>
+                <div class="gericht-group">
+                    <div class="gericht"> Gebratener Lachs mit Gemüse</div>
+                    <div class="gerichtpreis">Studierende: 5,90 € / Bedienstete: 8,50 € / Gäste: 9,20 €</div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="fußzeile">
+        (c) 2026 Hochschule Esslingen - Mensa Vorbestellung | <a href="Datenschutz.html">Datenschutz</a> | <a
+            href="Impressum.html">Impressum</a> | <a href="Kontakt.html">Kontakt</a>
+
+    </div>
+</body>
+
+</html>
