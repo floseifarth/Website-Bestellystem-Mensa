@@ -117,57 +117,9 @@
           margin-bottom: 20px;
       }
 
-      .gerichtdatum {
-          font-weight: 600;
-          color: #525252;
-      }
 
-      .speiseplan-container {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          width: 80%;
-          margin-top: 0px;
-          margin-left: 300px;
-      }
 
-      .kategorie {
-          font-weight: 600;
-          color: #525252;
-          flex-shrink: 0;
-          order: 1;
 
-      }
-
-      .sidebar {
-          width: 3px;
-          min-height: 100vh;
-          background-color: #343333;
-          order: 2;
-          flex-shrink: 0;
-      }
-
-      .gericht-group {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          gap: 5px;
-          order: 3;
-      }
-
-      .gericht {
-          font-weight: 600;
-          color: #525252;
-          flex-shrink: 0;
-
-      }
-
-      .gerichtpreis {
-          font-weight: 400;
-          color: #525252;
-
-          font-size: 14px;
-      }
 
       .fußzeile {
           position: fixed;

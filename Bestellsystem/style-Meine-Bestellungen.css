@@ -117,74 +117,6 @@
           margin-bottom: 20px;
       }
 
-      .QR-Code_Bild {
-          position: absolute;
-          top: 225px;
-          left: 300px;
-          width: 30%;
-      }
-
-      .gerichtdatum {
-          font-weight: 600;
-          color: #525252;
-      }
-
-      .speiseplan-container {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-start;
-          width: 80%;
-          margin-top: 0px;
-          margin-left: 300px;
-      }
-
-      .kategorie {
-          font-weight: 600;
-          color: #525252;
-          flex-shrink: 0;
-          order: 1;
-
-      }
-
-      .sidebar {
-          width: 3px;
-          min-height: 100vh;
-          background-color: #343333;
-          order: 2;
-          flex-shrink: 0;
-      }
-
-      .gericht-group {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-          gap: 5px;
-          order: 3;
-      }
-
-      .gericht {
-          font-weight: 600;
-          color: #525252;
-          flex-shrink: 0;
-
-      }
-
-      .gerichtpreis {
-          font-weight: 400;
-          color: #525252;
-
-          font-size: 14px;
-      }
-
-      .auswahlleiste {
-          background-color: rgb(245, 243, 243);
-          width: 620px;
-          border-radius: 8px;
-          padding: 10px;
-          font-weight: 400;
-
-      }
-
       .gerichtfenster {
           background-color: rgb(245, 243, 243);
           width: 600px;
@@ -214,63 +146,6 @@
       .gerichts-info {
           flex: 1;
           padding-bottom: 60px;
-      }
-
-      .gerichthinzu-button {
-          position: absolute;
-          right: 20px;
-          bottom: 20px;
-          font-weight: 700;
-          height: 30px;
-          padding: 0 12px;
-          font-size: 12px;
-          background-color: rgb(229, 226, 226);
-          border-radius: 8px;
-      }
-
-      .bestellfenster {
-          background-color: rgb(245, 243, 243);
-          border-radius: 8px;
-          padding: 20px;
-          position: fixed;
-          width: 300px;
-          height: 100vb;
-          top: 100px;
-          right: 10px;
-          font-weight: 600;
-      }
-
-      .bestellfensterfenster {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-      }
-
-      .bestell-zeile {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-      }
-
-      .bestell-zeile.preis {
-          text-align: right;
-          min-width: 70px;
-      }
-
-      .bestell-zeile.gesamt {
-          font-weight: 700;
-          border-top: 1px solid #ccc;
-          padding-top: 8px;
-      }
-
-      .vorbestellung-button {
-          position: absolute;
-          right: 20px;
-          font-weight: 700;
-          height: 30px;
-          font-size: 12px;
-          background-color: rgb(229, 226, 226);
-          border-radius: 8px;
       }
 
       .fußzeile {
