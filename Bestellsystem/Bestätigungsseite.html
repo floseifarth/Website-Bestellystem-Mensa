@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="style-Vorbestellungen.css">
+    <link rel="stylesheet" href="style-Bestätigungsseite.css">
 </head>
 
 <body>
@@ -48,6 +48,7 @@
             Profil
         </a><br>
     </div>
+
     <div class="datum">
         <div class="datum-row">
             <p><span id="datum"></span></p>
@@ -60,60 +61,12 @@
     </div>
 
     <div class="hauptfeld-mitte">
-        <h1>Vorbestellung</h1>
+        <h1>Bestätigung ihrer Bestellung</h1>
         <!-- Hier kommt der Speiseplan-Inhalt -->
-        Bestellen Sie hier ihr Essen im Voraus.<br><br>
-
-        ✔️Vorbestellungen gelten immer zwei Wochen im Voraus. <br>
-        ✔️Abholung zwischen 12.00 und 14.00 Uhr. <br>
-        ✔️Zahlung erfolgt online über Paypal oder bei Abholung über das Mensa-Guthaben. <br><br>
-
-        <div class="auswahlleiste">
-            Mensa wählen:
-            <select>
-                <option value="Stadtmitte">Esslingen Stadtmitte</option>
-                <option value="Flandernstraße ">Flandernstraße</option>
-                <option value="Göppingen">Göppingen</option>
-            </select>
-            Datum wählen:
-            <select id="datum-select">
-                <!-- Optionen werden per JavaScript generiert -->
-            </select>
-        </div>
-
-        <div class="gerichtfenster">
-            <img class="gerichtbild" src="img/currwurst.jpeg" alt="Gericht">
-            <div class="gerichts-info">
-                <div class="gerichtnamezeile">
-                    <span id="gericht-name">Currywurst mit Pommes</span>
-                    <span id="gericht-preis" class="preis">4,10 €</span>
-                </div>
-                <div id="gericht-art" class="gericht-art">Fleisch</div>
-                <div id="zusatzstoffe" class="zusatzstoffe">Zusatzstoffe</div>
-                <button type="button" class="gerichthinzu-button" id="add-order-button">Zur Bestellung
-                    hinzufügen</button>
-            </div>
-        </div>
-
+        <p>Glückwunsch! Ihre Bestellung wurde erfolgreich aufgegeben.</p>
+        <p>Sie können Ihre Bestellung unter "Meine Bestellungen" einsehen und verwalten.</p>
+        <p>Vielen Dank für Ihre Vorbestellung und guten Appetit!</p>
     </div>
-
-    <div class="bestellfenster">
-        Ihre Vorbestellung: <br><br>
-        <div class="bestellfensterfenster" id="order-list">
-            <div class="bestell-zeile">
-                Noch keine Vorbestellung.
-            </div>
-        </div>
-        <div class="bestell-zeile gesamt">
-            <span>Gesamt</span>
-            <span id="order-total" class="preis">0,00 €</span>
-        </div>
-
-        <a class="vorbestellung-button" href="Bestätigungsseite.html">Bestellung abschicken!</a>
-    </div>
-
-    <script src="script-Vorbestellungen.js"></script>
-
     <div class="fußzeile">
         (c) 2026 Hochschule Esslingen - Mensa Vorbestellung | <a href="Datenschutz.html">Datenschutz</a> | <a
             href="Impressum.html">Impressum</a> | <a href="Kontakt.html">Kontakt</a>
