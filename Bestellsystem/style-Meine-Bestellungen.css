@@ -129,6 +129,18 @@
           position: relative;
       }
 
+      .bestellfensterfenster {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+      }
+
+      .bestell-zeile {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
       .gerichtnamezeile {
           display: flex;
           justify-content: space-between;
