@@ -105,6 +105,8 @@ document.addEventListener('DOMContentLoaded', function () {
             price: priceElement.innerText
         });
         updateOrderSummary();
+
+        localStorage.setItem("Bestellung",JSON.stringify(orderItems));
     }
 
     // Datumsauswahl mit den nächsten 14 Werktagen befüllen
@@ -148,6 +150,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const addButton = document.getElementById("add-order-button");
     if (addButton) {
         addButton.addEventListener("click", addOrderItem);
+    }
+
+    // Beim Abschicken: Bestellung im localStorage speichern
+    const abschickenButton = document.querySelector(".vorbestellung-button");
+    if (abschickenButton) {
+        abschickenButton.addEventListener("click", function (e) {
+            if (orderItems.length === 0) {
+                e.preventDefault();
+                alert("Bitte füge zuerst ein Gericht zur Bestellung hinzu.");
+                return;
+            }
+            const vorhandene = JSON.parse(localStorage.getItem("bestellungen")) || [];
+            const alleBestellungen = vorhandene.concat(orderItems);
+            localStorage.setItem("bestellungen", JSON.stringify(alleBestellungen));
+        });
     }
 
     // Zu Beginn die Bestellübersicht initial anzeigen
