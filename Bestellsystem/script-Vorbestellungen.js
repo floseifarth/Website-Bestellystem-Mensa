@@ -72,7 +72,13 @@ document.addEventListener('DOMContentLoaded', function () {
             orderItems.forEach(function (item) {
                 const row = document.createElement("div");
                 row.className = "bestell-zeile";
-                row.innerHTML = `<span>${item.date}</span><span>${item.name}</span><span class="preis">${item.price}</span><button class="remove-button">x</button>`;
+                row.innerHTML = `<div class="gerichts-info">
+                             <div class="gerichtnamezeile">
+                                 <span>1x ${item.name}<br>${item.date}</span>
+                                 <span class="preis">${item.price}</span>
+                                 <button class="remove-button">x</button>
+                             </div>
+                          </div>`;
 
                 const removeButton = row.querySelector(".remove-button");
                 if (removeButton) {
@@ -95,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const nameElement = document.getElementById("gericht-name");
         const priceElement = document.getElementById("gericht-preis");
         const datumSelect = document.getElementById("datum-select");
+        const itemElement = document.querySelector(".gerichtbild");
         if (!nameElement || !priceElement || !datumSelect) return;
 
         const selectedDate = datumSelect.selectedOptions[0]?.textContent || datum;
@@ -102,11 +109,12 @@ document.addEventListener('DOMContentLoaded', function () {
         orderItems.push({
             date: selectedDate,
             name: nameElement.innerText,
-            price: priceElement.innerText
+            price: priceElement.innerText,
+            image: itemElement ? itemElement.src : ""
         });
         updateOrderSummary();
 
-        localStorage.setItem("Bestellung",JSON.stringify(orderItems));
+        localStorage.setItem("Bestellung", JSON.stringify(orderItems));
     }
 
     // Datumsauswahl mit den nächsten 14 Werktagen befüllen

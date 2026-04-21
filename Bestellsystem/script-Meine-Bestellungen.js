@@ -32,27 +32,27 @@ document.addEventListener('DOMContentLoaded', function () {
         // Jede Bestellung als Zeile anzeigen
         bestellungen.forEach(function (item, index) {
             const row = document.createElement("div");
-            row.className = "bestell-zeile";
-            row.innerHTML = `<span>${item.date}</span><span>${item.name}</span><span class="preis">${item.price}</span><button class="remove-button">x</button>`;
+            row.className = "gerichtfenster";
+            row.innerHTML = `<img class="gerichtbild" src="${item.image || ''}" alt="${item.name}">
+                <div class="gerichts-info">
+                    <div class="gerichtnamezeile">
+                        <span>1x ${item.name}<br>${item.date}</span>
+                        <span class="preis">${item.price}</span>
+                    </div>
+                    <button class="remove-button gerichthinzu-button">Bearbeiten</button>
+                </div>`;
 
-            // Bestellung löschen wenn "x" geklickt wird
-            const removeButton = row.querySelector(".remove-button");
-            if (removeButton) {
-                removeButton.addEventListener("click", function () {
-                    bestellungen.splice(index, 1);
-                    localStorage.setItem("bestellungen", JSON.stringify(bestellungen));
-                    location.reload();
-                });
-            }
+            // // Bestellung löschen wenn "x" geklickt wird
+            row.querySelector(".remove-button").addEventListener("click", function () {
+                bestellungen.splice(index, 1);
+                localStorage.setItem("bestellungen", JSON.stringify(bestellungen));
+                location.reload();
+            });
 
             orderList.appendChild(row);
             total += parsePrice(item.price);
         });
 
-        // Gesamtpreis am Ende anzeigen
-        const totalRow = document.createElement("div");
-        totalRow.className = "bestell-zeile gesamt";
-        totalRow.innerHTML = `<span>Gesamt</span><span class="preis">${formatPrice(total)}</span>`;
-        orderList.appendChild(totalRow);
+
     }
 });
