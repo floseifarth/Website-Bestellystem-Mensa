@@ -54,7 +54,7 @@
             <p><span id="datum"></span></p>
             <div class="profile-box">
                 <img class="profile-pic" src="img/Profil.svg" alt="Profilbild">
-                <span>Anmelden ...</span>
+                <input id="profile-name" type="text" placeholder="Name" class="profile-name-input">
             </div>
         </div>
         <script>
@@ -83,9 +83,10 @@
         Wir wünschen Ihnen einen guten Appetit und viel Freude beim Bestellen!
         <br><br>
         Bitte melden Sie sich an, um alle Funktionen nutzen zu können. <br><br>
-        <input type="text" placeholder="Anmeldename" class="guthaben-input"> <br><br>
-        <input type="password" placeholder="Passwort" class="guthaben-input"> <br><br>
-        <button><a class="startseite-button" href="Startseite.html">Anmelden</a></button>
+        <input id="login-email" type="email" placeholder="E-Mail" class="guthaben-input"> <br><br>
+        <input id="login-password" type="password" placeholder="Passwort" class="guthaben-input"> <br><br>
+        <button id="login-button" class="startseite-button" type="button">Anmelden</button>
+        <p id="login-message"></p>
 
     </div>
 
@@ -96,5 +97,7 @@
 
     </div>
 </body>
+
+<script type="module" src="script-Anmeldestartseite.js"></script>
 
 </html>
