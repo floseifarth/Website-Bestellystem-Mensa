@@ -362,3 +362,14 @@
     border-radius: 12px;
     margin-bottom: 12px;
 }
+
+.icons {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.allergene {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
