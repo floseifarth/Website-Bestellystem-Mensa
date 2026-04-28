@@ -66,13 +66,13 @@
 
         ✔️Vorbestellungen gelten immer zwei Wochen im Voraus. <br>
         ✔️Abholung zwischen 12.00 und 14.00 Uhr. <br>
-        ✔️Zahlung erfolgt online über Paypal oder bei Abholung über das Mensa-Guthaben. <br><br>
+        ✔️Zahlung erfolgt bei Abholung über das Mensa-Guthaben. <br><br>
 
         <div class="auswahlleiste">
             Mensa wählen:
             <select>
-                <option value="Stadtmitte">Esslingen Stadtmitte</option>
-                <option value="Flandernstraße ">Flandernstraße</option>
+                <!-- <option value="Stadtmitte">Esslingen Stadtmitte</option>
+                <option value="Flandernstraße ">Flandernstraße</option> -->
                 <option value="Göppingen">Göppingen</option>
             </select>
             Datum wählen:
@@ -81,16 +81,34 @@
             </select>
         </div>
 
-        <div class="gerichtfenster">
-            <img class="gerichtbild" src="img/currwurst.jpeg" alt="Gericht">
-            <div class="gerichts-info">
-                <div class="gerichtnamezeile">
-                    <span id="gericht-name">Currywurst mit Pommes</span>
-                    <span id="gericht-preis" class="preis">4,10 €</span>
+        <div class="speiseplan-eintrag">
+            <div class="speiseplan-links">
+                <h3 id="gericht-tag"></h3>
+                <p id="gericht-datum">07. April 2026</p>
+            </div>
+
+            <div class="speiseplan-mitte">
+                <img src="img/currywurst.jpg" class="gericht-bild" alt="">
+                <p>Tagesangebot</p>
+                <h3 id="gericht-name">Currywurst mit Pommes</h3>
+                <!-- <p class="icons">
+                    🐖 🌾
+                </p> -->
+
+                <p class="allergene">
+                    Allergene: Gluten, Senf
+                </p>
+                <div id="preise" class="preise">
+                    <p>Studierende: <strong id="gericht-preis">4,10 €</strong></p>
+                    <p>Bedienstete: <strong>7,10 €</strong></p>
+                    <p>Gäste: <strong>7,60 €</strong></p>
                 </div>
-                <div id="gericht-art" class="gericht-art">Fleisch</div>
-                <div id="zusatzstoffe" class="zusatzstoffe">Zusatzstoffe</div>
-                <button type="button" class="gerichthinzu-button" id="add-order-button">Zur Bestellung
+            </div>
+
+            <div class="speiseplan-rechts">
+                <!-- <a id="add-order-button" class="vorbestell-btn">Zur Bestellung
+                    hinzufügen</a> -->
+                <button type="button" class="vorbestell-btn" id="add-order-button">Zur Bestellung
                     hinzufügen</button>
             </div>
         </div>

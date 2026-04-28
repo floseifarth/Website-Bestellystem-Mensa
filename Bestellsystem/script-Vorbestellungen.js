@@ -19,10 +19,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Menüdaten für die Wochentage
     const menuByDay = {
         Montag: { name: "Pasta Pesto", price: "5,20 €", image: "img/pasta-pesto.jpeg", alt: "Pasta Pesto" },
-        Dienstag: { name: "Gericht2", price: "4,10 €", image: "img/currwurst.jpeg", alt: "Currywurst mit Pommes" },
-        Mittwoch: { name: "Gericht3", price: "4,10 €", image: "img/currwurst.jpeg", alt: "Currywurst mit Pommes" },
-        Donnerstag: { name: "Gebratener Lachs mit Gemüse", price: "5,90 €", image: "img/gebratener-lachs-mit-gemuese.jpeg", alt: "Gebratener Lachs mit Gemüse" },
-        Freitag: { name: "Currywurst mit Pommes", price: "4,10 €", image: "img/currwurst.jpeg", alt: "Currywurst mit Pommes" }
+        Dienstag: { name: "Gericht2", price: "4,10 €", image: "img/currywurst.jpg", alt: "Currywurst mit Pommes" },
+        Mittwoch: { name: "Gericht3", price: "4,10 €", image: "img/currywurst.jpg", alt: "Currywurst mit Pommes" },
+        Donnerstag: { name: "Gebratener Lachs mit Gemüse", price: "5,90 €", image: "img/lachs.jpg", alt: "Gebratener Lachs mit Gemüse" },
+        Freitag: { name: "Currywurst mit Pommes", price: "4,10 €", image: "img/currywurst.jpg", alt: "Currywurst mit Pommes" }
     };
 
     // Array für die aktuelle Bestellliste
@@ -40,11 +40,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Aktuelles Gericht in der Vorschau aktualisieren
-    function updateDish(weekday) {
+    function updateDish(weekday, datumText) {
         const dish = menuByDay[weekday] || menuByDay.Freitag;
         const nameElement = document.getElementById("gericht-name");
         const priceElement = document.getElementById("gericht-preis");
-        const dishImage = document.querySelector(".gerichtbild");
+        const dishImage = document.querySelector(".gericht-bild");
+        const tagElement = document.getElementById("gericht-tag");
+        const datumElement = document.getElementById("gericht-datum");
 
         if (nameElement) nameElement.innerText = dish.name;
         if (priceElement) priceElement.innerText = dish.price;
@@ -52,6 +54,8 @@ document.addEventListener('DOMContentLoaded', function () {
             dishImage.src = dish.image;
             dishImage.alt = dish.alt;
         }
+        if (tagElement) tagElement.innerText = weekday;
+        if (datumElement && datumText) datumElement.innerText = datumText;
     }
 
     // Bestellübersicht rechts neu zeichnen
@@ -101,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const nameElement = document.getElementById("gericht-name");
         const priceElement = document.getElementById("gericht-preis");
         const datumSelect = document.getElementById("datum-select");
-        const itemElement = document.querySelector(".gerichtbild");
+        const itemElement = document.querySelector(".gericht-bild");
         if (!nameElement || !priceElement || !datumSelect) return;
 
         const selectedDate = datumSelect.selectedOptions[0]?.textContent || datum;
@@ -143,14 +147,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         datumSelect.addEventListener("change", function () {
             const weekday = this.selectedOptions[0]?.dataset.weekday;
+            const datumText = this.selectedOptions[0]?.textContent;
             if (weekday) {
-                updateDish(weekday);
+                updateDish(weekday, datumText);
             }
         });
 
         if (datumSelect.options.length > 0) {
             datumSelect.selectedIndex = 0;
-            updateDish(datumSelect.options[0].dataset.weekday);
+            updateDish(datumSelect.options[0].dataset.weekday, datumSelect.options[0].textContent);
         }
     }
 
