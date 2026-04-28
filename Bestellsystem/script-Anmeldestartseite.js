@@ -14,6 +14,60 @@ function setMessage(text, isError) {
     // messageElement.style.color = isError ? "#b42318" : "#027a48";
 }
 
+
+let istRegistrierung = false; // Lokaler Zustand, um zwischen Anmelde- und Registrierungsmodus zu wechseln.
+// Wechselt zwischen Anmelde- und Registrierungsmodus.
+function toggleRegistrierung() {
+    istRegistrierung = !istRegistrierung;
+    const anzeige = istRegistrierung ? "block" : "none";
+    document.getElementById("login-name").style.display = anzeige;
+    document.getElementById("login-password-confirm").style.display = anzeige;
+
+    document.getElementById("login-button").textContent = istRegistrierung ? "Registrieren" : "Anmelden";
+    document.getElementById("register-toggle").textContent = istRegistrierung ? "Zurück zum Login" : "Neu registrieren";
+}
+
+
+// Registrierungsprozess
+async function register() {
+    const email = document.getElementById("login-email").value.trim();
+    const password = document.getElementById("login-password").value;
+    const passwordConfirm = document.getElementById("login-password-confirm").value;
+    const name = document.getElementById("login-name").value.trim();
+
+    // Pflichtfelder prüfen
+    if (!name || !email || !password || !passwordConfirm) {
+        setMessage("Bitte alle Felder ausfüllen.", true);
+        return;
+    }
+
+    // Passwörter vergleichen
+    if (password !== passwordConfirm) {
+        setMessage("Passwörter stimmen nicht überein.", true);
+        return;
+    }
+
+    setMessage("Registrierung wird durchgeführt...", false);
+
+    // User wird in Superbase Auth angelegt
+    const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { //Zusätzliche Nutzer-Infos
+            data: {
+                full_name: name
+            }
+        }
+    });
+
+    if (error) {
+        setMessage("Registrierung fehlgeschlagen: " + error.message, true);
+        return;
+    }
+
+    setMessage("Registrierung erfolgreich! Bitte E-Mail bestätigen.", false);
+}
+
 // Fuehrt den eigentlichen Login-Prozess aus.
 async function login() {
     // Eingabefelder fuer E-Mail und Passwort aus dem DOM lesen.
@@ -63,9 +117,21 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.getElementById("login-button");
     const passwordInput = document.getElementById("login-password");
 
-    // Klick auf den Login-Button startet den Login-Prozess.
+    // Klick auf den Login-Button startet Login oder Registrierung je nach Modus.
     if (loginButton) {
-        loginButton.addEventListener("click", login);
+        loginButton.addEventListener("click", function () {
+            if (istRegistrierung) {
+                register();
+            } else {
+                login();
+            }
+        });
+    }
+
+    // Klick auf "Neu registrieren" schaltet den Registrierungsmodus um.
+    const registerToggle = document.getElementById("register-toggle");
+    if (registerToggle) {
+        registerToggle.addEventListener("click", toggleRegistrierung);
     }
 
     // Enter im Passwortfeld startet ebenfalls den Login.

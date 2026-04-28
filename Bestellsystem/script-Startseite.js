@@ -14,15 +14,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // Anzeigenamen aus den User-Metadaten holen.
-    // Supabase speichert eigene Felder unter user_metadata.
-    const displayName =
-        user.user_metadata?.display_name ||   // Benutzerdefinierter Anzeigename
-        user.user_metadata?.full_name ||       // Alternativ: vollstaendiger Name
 
+    const displayName =
+        user.user_metadata?.full_name ||       // Alternativ: vollstaendiger Name
+        user.user_metadata?.display_name ||   // Benutzerdefinierter Anzeigename
+        user.email;                            // Fallback: E-Mail-Adresse
 
     // Namen rechts oben im Profil-Bereich einsetzen.
     const nameElement = document.getElementById("user-display-name");
     if (nameElement) {
         nameElement.textContent = displayName;
     }
+
 });
