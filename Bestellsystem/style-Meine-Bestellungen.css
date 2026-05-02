@@ -105,7 +105,7 @@
 
           /* background-color: #e5e5fa; */
           border-radius: 8px;
-          width: 800px;
+
           position: fixed;
           top: 100px;
           left: 350px;
@@ -117,16 +117,103 @@
           margin-bottom: 20px;
       }
 
-      .gerichtfenster {
-          background-color: rgb(245, 243, 243);
+      .speiseplan-eintrag {
           width: 600px;
-          margin-top: 10px;
-          border-radius: 8px;
-          padding: 20px;
+          background: #ffffff;
+          border-radius: 18px;
+          padding: 20px 24px;
+          margin-bottom: 20px;
+          margin-top: 20px;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+          display: grid;
+          grid-template-columns: 150px 1fr auto;
+          align-items: center;
+          gap: 30px;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .speiseplan-eintrag:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      .speiseplan-links {
           display: flex;
-          align-items: flex-start;
-          gap: 20px;
-          position: relative;
+          flex-direction: column;
+          justify-content: center;
+          height: 100%;
+      }
+
+      .speiseplan-links h3 {
+          margin: 0;
+          font-size: 18px;
+      }
+
+      .speiseplan-links p {
+          margin: 0;
+          color: #777;
+          font-size: 14px;
+      }
+
+      .speiseplan-mitte {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+      }
+
+      .speiseplan-mitte h3 {
+          margin-top: 10px;
+          margin-bottom: 18px;
+      }
+
+      .speiseplan-rechts {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+      }
+
+      .vorbestell-btn {
+          display: inline-block;
+          background: linear-gradient(135deg, #6a5af9, #8b7bff);
+          border: none;
+          padding: 10px 18px;
+          border-radius: 10px;
+          color: white;
+          font-size: 15px;
+          font-weight: 600;
+          cursor: pointer;
+          margin-top: 12px;
+          text-decoration: none;
+      }
+
+      .vorbestell-btn:hover {
+          opacity: 0.9;
+          transform: scale(1.05);
+      }
+
+      .preise {
+          font-size: 14px;
+          color: #555;
+          line-height: 1.6;
+      }
+
+      .gericht-bild {
+          width: 200px;
+          height: 120px;
+          object-fit: cover;
+          border-radius: 12px;
+          margin-bottom: 12px;
+      }
+
+      .icons {
+          font-size: 18px;
+          margin: 5px 0;
+      }
+
+      .allergene {
+          font-size: 13px;
+          color: #666;
+          margin-bottom: 10px;
       }
 
       .bestellfensterfenster {
@@ -139,25 +226,6 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-      }
-
-      .gerichtnamezeile {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 10px;
-          font-size: 20px;
-      }
-
-      .gerichtbild {
-          width: 120px;
-          height: auto;
-          border-radius: 8px;
-      }
-
-      .gerichts-info {
-          flex: 1;
-          padding-bottom: 60px;
       }
 
       .fußzeile {

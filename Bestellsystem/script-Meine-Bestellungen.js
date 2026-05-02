@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', function () {
         return Number(cleaned.replace(",", "."));
     }
 
+    // Numerisches Datum umwandeln (z.B. "16.05.2026" → "16. Mai 2026")
+    function formatDatum(datumStr) {
+        const monate = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+        const match = datumStr.match(/^(\d{1,2})\.(\d{2})\.(\d{4})$/);
+        if (!match) return datumStr;
+        return `${match[1].padStart(2, '0')}. ${monate[parseInt(match[2], 10) - 1]} ${match[3]}`;
+    }
+
     // Bestellliste im HTML und gespeicherte Bestellungen aus localStorage holen
     const orderList = document.getElementById("order-list");
     const bestellungen = JSON.parse(localStorage.getItem("bestellungen")) || [];
@@ -29,28 +37,61 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         let total = 0;
 
-        // Jede Bestellung als Zeile anzeigen
+        // Bestellungen nach Datum + Gericht gruppieren
+        const gruppen = {};
         bestellungen.forEach(function (item, index) {
+            const key = `${item.date}||${item.name}`;
+            if (!gruppen[key]) {
+                gruppen[key] = { ...item, kategorien: [], indices: [] };
+            }
+            gruppen[key].kategorien.push({ label: item.category || 'Studierende', price: item.price });
+            gruppen[key].indices.push(index);
+        });
+
+        Object.values(gruppen).forEach(function (gruppe) {
+            const dateParts = (gruppe.date || '').split(', ');
+            const wochentag = dateParts[0] || '';
+            const datumText = formatDatum(dateParts[1] || '');
+
+            // Kategorien zählen und Preise summieren
+            const counts = {};
+            let gruppenTotal = 0;
+            gruppe.kategorien.forEach(function (k) {
+                counts[k.label] = (counts[k.label] || 0) + 1;
+                gruppenTotal += parsePrice(k.price);
+            });
+            const kategorieText = Object.entries(counts).map(([label, n]) => `${n}x ${label}`).join(', ');
+
             const row = document.createElement("div");
-            row.className = "gerichtfenster";
-            row.innerHTML = `<img class="gerichtbild" src="${item.image || ''}" alt="${item.name}">
-                <div class="gerichts-info">
-                    <div class="gerichtnamezeile">
-                        <span>1x ${item.name}<br>${item.date}</span>
-                        <span class="preis">${item.price}</span>
+            row.className = "speiseplan-eintrag";
+            row.innerHTML = `
+                <div class="speiseplan-links">
+                    <h3>${wochentag}</h3>
+                    <p>${datumText}</p>
+                </div>
+                <div class="speiseplan-mitte">
+                    <img src="${gruppe.image || ''}" class="gericht-bild" alt="">
+                    <h3>${gruppe.name || ''}</h3>
+                    <div class="preise">
+                        <p>${kategorieText}</p>
+                        <p>Gesamt: <strong>${formatPrice(gruppenTotal)}</strong></p>
                     </div>
-                    <button class="remove-button gerichthinzu-button">Bearbeiten</button>
+                </div>
+                <div class="speiseplan-rechts">
+                    <button type="button" class="vorbestell-btn remove-button">Stornieren</button>
                 </div>`;
 
-            // // Bestellung löschen wenn "x" geklickt wird
             row.querySelector(".remove-button").addEventListener("click", function () {
-                bestellungen.splice(index, 1);
+                // Alle Einträge dieser Gruppe entfernen (von hinten, damit Indizes stimmen)
+                gruppe.indices.slice().sort((a, b) => b - a).forEach(function (i) {
+                    bestellungen.splice(i, 1);
+                });
                 localStorage.setItem("bestellungen", JSON.stringify(bestellungen));
                 location.reload();
             });
 
             orderList.appendChild(row);
-            total += parsePrice(item.price);
+            total += gruppenTotal;
         });
 
 

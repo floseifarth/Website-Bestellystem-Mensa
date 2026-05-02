@@ -18,11 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Menüdaten für die Wochentage
     const menuByDay = {
-        Montag: { name: "Pasta Pesto", price: "5,20 €", image: "img/pasta-pesto.jpeg", alt: "Pasta Pesto" },
-        Dienstag: { name: "Gericht2", price: "4,10 €", image: "img/currywurst.jpg", alt: "Currywurst mit Pommes" },
-        Mittwoch: { name: "Gericht3", price: "4,10 €", image: "img/currywurst.jpg", alt: "Currywurst mit Pommes" },
-        Donnerstag: { name: "Gebratener Lachs mit Gemüse", price: "5,90 €", image: "img/lachs.jpg", alt: "Gebratener Lachs mit Gemüse" },
-        Freitag: { name: "Currywurst mit Pommes", price: "4,10 €", image: "img/currywurst.jpg", alt: "Currywurst mit Pommes" }
+        Montag: { name: "Pasta Pesto", priceStud: "5,20 €", priceBed: "6,50 €", priceGuest: "7,00 €", image: "img/pasta-pesto.jpeg", alt: "Pasta Pesto" },
+        Dienstag: { name: "Gericht2", priceStud: "4,10 €", priceBed: "5,00 €", priceGuest: "5,50 €", image: "img/currywurst.jpg", alt: "Currywurst mit Pommes" },
+        Mittwoch: { name: "Gericht3", priceStud: "4,10 €", priceBed: "5,00 €", priceGuest: "5,50 €", image: "img/currywurst.jpg", alt: "Currywurst mit Pommes" },
+        Donnerstag: { name: "Gebratener Lachs mit Gemüse", priceStud: "5,90 €", priceBed: "6,50 €", priceGuest: "7,00 €", image: "img/lachs.jpg", alt: "Gebratener Lachs mit Gemüse" },
+        Freitag: { name: "Currywurst mit Pommes", priceStud: "4,10 €", priceBed: "5,00 €", priceGuest: "5,50 €", image: "img/currywurst.jpg", alt: "Currywurst mit Pommes" }
     };
 
     // Array für die aktuelle Bestellliste
@@ -43,19 +43,31 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateDish(weekday, datumText) {
         const dish = menuByDay[weekday] || menuByDay.Freitag;
         const nameElement = document.getElementById("gericht-name");
-        const priceElement = document.getElementById("gericht-preis");
         const dishImage = document.querySelector(".gericht-bild");
         const tagElement = document.getElementById("gericht-tag");
         const datumElement = document.getElementById("gericht-datum");
+        const studElement = document.getElementById("preis-stud");
+        const bedElement = document.getElementById("preis-bed");
+        const guestElement = document.getElementById("preis-guest");
 
         if (nameElement) nameElement.innerText = dish.name;
-        if (priceElement) priceElement.innerText = dish.price;
+        if (studElement) studElement.innerText = dish.priceStud;
+        if (bedElement) bedElement.innerText = dish.priceBed;
+        if (guestElement) guestElement.innerText = dish.priceGuest;
         if (dishImage) {
             dishImage.src = dish.image;
             dishImage.alt = dish.alt;
         }
         if (tagElement) tagElement.innerText = weekday;
-        if (datumElement && datumText) datumElement.innerText = datumText;
+        if (datumElement && datumText) {
+            const parts = datumText.split(', ');
+            datumElement.innerText = parts[1] || datumText;
+        }
+
+        // Radio-Auswahl zurücksetzen und Button deaktivieren
+        document.querySelectorAll('input[name="preis"]').forEach(r => r.checked = false);
+        const addBtn = document.getElementById("add-order-button");
+        if (addBtn) addBtn.disabled = true;
     }
 
     // Bestellübersicht rechts neu zeichnen
@@ -103,17 +115,25 @@ document.addEventListener('DOMContentLoaded', function () {
     // Aktuelles Gericht zur Bestellliste hinzufügen
     function addOrderItem() {
         const nameElement = document.getElementById("gericht-name");
-        const priceElement = document.getElementById("gericht-preis");
         const datumSelect = document.getElementById("datum-select");
         const itemElement = document.querySelector(".gericht-bild");
-        if (!nameElement || !priceElement || !datumSelect) return;
+        const selectedRadio = document.querySelector('input[name="preis"]:checked');
+        if (!nameElement || !datumSelect || !selectedRadio) return;
+
+        const weekday = datumSelect.selectedOptions[0]?.dataset.weekday;
+        const dish = menuByDay[weekday] || menuByDay.Freitag;
+        const priceMap = { stud: dish.priceStud, bed: dish.priceBed, guest: dish.priceGuest };
+        const categoryMap = { stud: "Studierende", bed: "Bedienstete", guest: "Gäste" };
+        const selectedPrice = priceMap[selectedRadio.value];
+        const selectedCategory = categoryMap[selectedRadio.value];
 
         const selectedDate = datumSelect.selectedOptions[0]?.textContent || datum;
 
         orderItems.push({
             date: selectedDate,
             name: nameElement.innerText,
-            price: priceElement.innerText,
+            price: selectedPrice,
+            category: selectedCategory,
             image: itemElement ? itemElement.src : ""
         });
         updateOrderSummary();
@@ -134,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const dayOfWeek = currentDate.getDay();
             if (dayOfWeek !== 0 && dayOfWeek !== 6) {
                 const tagName = tage[dayOfWeek];
-                const datumString = currentDate.toLocaleDateString("de-DE");
+                const datumString = currentDate.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
                 const option = document.createElement("option");
                 option.value = currentDate.toISOString().split('T')[0];
                 option.textContent = `${tagName}, ${datumString}`;
@@ -158,6 +178,14 @@ document.addEventListener('DOMContentLoaded', function () {
             updateDish(datumSelect.options[0].dataset.weekday, datumSelect.options[0].textContent);
         }
     }
+
+    // Button aktivieren sobald ein Preis gewählt wird
+    document.querySelectorAll('input[name="preis"]').forEach(function (radio) {
+        radio.addEventListener("change", function () {
+            const addBtn = document.getElementById("add-order-button");
+            if (addBtn) addBtn.disabled = false;
+        });
+    });
 
     // Klick-Event auf den Bestellbutton setzen
     const addButton = document.getElementById("add-order-button");

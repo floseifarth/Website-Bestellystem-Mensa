@@ -90,7 +90,7 @@
             <div class="speiseplan-mitte">
                 <img src="img/currywurst.jpg" class="gericht-bild" alt="">
                 <p>Tagesangebot</p>
-                <h3 id="gericht-name">Currywurst mit Pommes</h3>
+                <h3 id="gericht-name"></h3>
                 <!-- <p class="icons">
                     🐖 🌾
                 </p> -->
@@ -98,17 +98,20 @@
                 <p class="allergene">
                     Allergene: Gluten, Senf
                 </p>
-                <div id="preise" class="preise">
-                    <p>Studierende: <strong id="gericht-preis">4,10 €</strong></p>
-                    <p>Bedienstete: <strong>7,10 €</strong></p>
-                    <p>Gäste: <strong>7,60 €</strong></p>
+                <div class="preise" id="preise-auswahl">
+                    <label><input type="radio" name="preis" value="stud"> Studierende: <strong
+                            id="preis-stud"></strong></label><br>
+                    <label><input type="radio" name="preis" value="bed"> Bedienstete: <strong
+                            id="preis-bed"></strong></label><br>
+                    <label><input type="radio" name="preis" value="guest"> Gäste: <strong
+                            id="preis-guest"></strong></label>
                 </div>
             </div>
 
             <div class="speiseplan-rechts">
                 <!-- <a id="add-order-button" class="vorbestell-btn">Zur Bestellung
                     hinzufügen</a> -->
-                <button type="button" class="vorbestell-btn" id="add-order-button">Zur Bestellung
+                <button type="button" class="vorbestell-btn" id="add-order-button" disabled>Zur Bestellung
                     hinzufügen</button>
             </div>
         </div>
